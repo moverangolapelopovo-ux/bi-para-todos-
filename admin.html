@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Administração — BI Para Todos</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<main class="wrap">
+<header><div><small>ÁREA PRIVADA</small><h1>BI Para Todos</h1><p>Gestão das assinaturas.</p></div><button id="logout" class="hidden">Terminar sessão</button></header>
+
+<section id="login" class="card login">
+<h2>Entrar</h2>
+<form id="loginForm">
+<label>E-mail<input id="email" type="email" required></label>
+<label>Palavra-passe<input id="password" type="password" required></label>
+<button type="submit">ENTRAR</button>
+<p id="loginMsg"></p>
+</form>
+</section>
+
+<section id="dashboard" class="hidden">
+<div class="metrics">
+<article><b id="total">—</b><span>Total</span></article>
+<article><b id="today">—</b><span>Hoje</span></article>
+<article><b id="week">—</b><span>7 dias</span></article>
+<article><b id="leader">—</b><span>Província líder</span></article>
+</div>
+
+<section class="card controls">
+<label>Pesquisar<input id="search" type="search" placeholder="Nome"></label>
+<label>Província<select id="province"><option value="">Todas</option></select></label>
+<div><button id="refresh">Atualizar</button> <button id="csv" class="secondary">Exportar CSV</button></div>
+</section>
+
+<section class="card">
+<h2>Assinaturas <span id="count"></span></h2>
+<div class="table-wrap"><table><thead><tr><th>Nome</th><th>Província</th><th>Data</th><th>Ação</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="pager"><button id="prev" class="secondary">Anterior</button><span id="page">Página 1</span><button id="next" class="secondary">Seguinte</button></div>
+<p id="dashMsg"></p>
+</section>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
