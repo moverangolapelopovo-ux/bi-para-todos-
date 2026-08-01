@@ -26,13 +26,16 @@ async function charts(){
    const values=(provinceData||[]).map(r=>Number(r.total||0));
    if(provinceChartInstance)provinceChartInstance.destroy();
    provinceChartInstance=new Chart(document.getElementById("provinceChart"),{
-     type:"bar",
+     type:"doughnut",
      data:{labels,datasets:[{label:"Assinaturas",data:values}]},
      options:{
        responsive:true,
        maintainAspectRatio:false,
-       plugins:{legend:{display:false}},
-       scales:{y:{beginAtZero:true,ticks:{precision:0}}}
+       cutout:"62%",
+       plugins:{
+         legend:{position:"bottom"},
+         tooltip:{callbacks:{label:(ctx)=>`${ctx.label}: ${ctx.raw}`}}
+       }
      }
    });
  }
@@ -43,7 +46,7 @@ async function charts(){
    if(dailyChartInstance)dailyChartInstance.destroy();
    dailyChartInstance=new Chart(document.getElementById("dailyChart"),{
      type:"line",
-     data:{labels,datasets:[{label:"Assinaturas por dia",data:values,tension:.25,fill:false}]},
+     data:{labels,datasets:[{label:"Assinaturas por dia",data:values,tension:.35,fill:true,borderWidth:3,pointRadius:3}]},
      options:{
        responsive:true,
        maintainAspectRatio:false,

@@ -23,3 +23,35 @@
 .x-network{background:#111}
 .telegram{background:#229ed9}
 .share-button:hover{filter:brightness(.92);transform:translateY(-1px)}
+
+/* V6 — acabamento profissional */
+body{
+  background:
+    radial-gradient(circle at top right,rgba(225,6,0,.06),transparent 30%),
+    linear-gradient(180deg,#f7f7f4 0%,#eeeeeb 100%);
+}
+.card{transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.09)}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hero-badges span,.counter-badge{
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(8px);
+  padding:8px 12px;border-radius:999px;font-weight:800;font-size:.82rem
+}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.section-heading small,.install-card small{color:#b00000;font-weight:900;letter-spacing:.12em}
+.section-heading h2{margin:3px 0 14px}
+.section-heading .counter-badge{background:#171717;color:#fff;border:0;white-space:nowrap}
+.province-row{grid-template-columns:minmax(110px,180px) 1fr 55px;align-items:center}
+.province-track{height:13px;background:#ececec;border-radius:999px;overflow:hidden}
+.province-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#df1010,#ffbd18);transition:width .6s ease}
+.install-card{display:flex;justify-content:space-between;align-items:center;gap:22px;background:linear-gradient(135deg,#151515,#3a0909);color:#fff}
+.install-card h2{margin:5px 0}
+.install-card p{margin:0;color:#e5e5e5}
+.install-card button{white-space:nowrap;background:#ffbd18;color:#111}
+@media(max-width:700px){
+  .section-heading,.install-card{align-items:flex-start;flex-direction:column}
+  .province-row{grid-template-columns:90px 1fr 40px}
+  .install-card button{width:100%}
+}

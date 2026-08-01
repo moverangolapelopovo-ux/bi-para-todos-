@@ -95,6 +95,8 @@
     document.getElementById("progressBar").style.width = percentage + "%";
 
     const provinceStats = document.getElementById("provinceStats");
+    const provinceBadge = document.getElementById("provinceCountBadge");
+    provinceBadge.textContent = `${rows.length} ${rows.length === 1 ? "província" : "províncias"}`;
 
     if (!rows.length) {
       provinceStats.innerHTML = "<p>Ainda não existem assinaturas registadas.</p>";
@@ -148,9 +150,10 @@
     btn.disabled = true;
     btn.textContent = "A REGISTAR…";
 
-    const { error } = await client
-      .from("assinaturas")
-      .insert({ nome, provincia });
+    const { error } = await client.rpc("registrar_assinatura_publica", {
+      p_nome: nome,
+      p_provincia: provincia
+    });
 
     if (error) {
       console.error(error);
@@ -222,6 +225,28 @@
   // Salvaguarda: atualiza a cada 30 segundos, mesmo se o Realtime falhar.
   loadStats();
   setInterval(loadStats, 30000);
+
+  let deferredInstallPrompt = null;
+  const installCard = document.getElementById("installCard");
+  const installButton = document.getElementById("installApp");
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installCard.classList.remove("hidden");
+  });
+
+  installButton?.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installCard.classList.add("hidden");
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installCard.classList.add("hidden");
+  });
 
   window.addEventListener("beforeunload", () => {
     client.removeChannel(channel);

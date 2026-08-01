@@ -263,3 +263,8 @@ a {
     margin: 4px 0;
   }
 }
+
+.eyebrow{color:var(--dark-red);font-weight:900;letter-spacing:.12em}
+.chart-card{border:1px solid rgba(0,0,0,.04)}
+.metrics article{transition:transform .2s ease,box-shadow .2s ease}
+.metrics article:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.09)}
