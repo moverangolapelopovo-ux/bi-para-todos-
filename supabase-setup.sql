@@ -1,0 +1,13 @@
+do $$ begin if to_regclass('public."Assinaturas"') is not null and to_regclass('public.assinaturas') is null then alter table public."Assinaturas" rename to assinaturas; end if; end $$;
+do $$ begin if exists(select 1 from information_schema.columns where table_schema='public' and table_name='assinaturas' and column_name='Provincia') then alter table public.assinaturas rename column "Provincia" to provincia; end if; end $$;
+alter table public.assinaturas alter column nome set not null, alter column provincia set not null;
+alter table public.assinaturas drop constraint if exists assinaturas_nome_tamanho;
+alter table public.assinaturas add constraint assinaturas_nome_tamanho check(char_length(trim(nome)) between 3 and 120);
+alter table public.assinaturas enable row level security;
+revoke all on table public.assinaturas from anon,authenticated;
+grant insert on table public.assinaturas to anon,authenticated;
+drop policy if exists "permitir assinatura publica" on public.assinaturas;
+create policy "permitir assinatura publica" on public.assinaturas for insert to anon,authenticated with check(char_length(trim(nome)) between 3 and 120 and char_length(trim(provincia)) between 2 and 60);
+create or replace function public.obter_estatisticas_assinaturas() returns table(total bigint,hoje bigint,por_provincia jsonb) language sql security definer set search_path=public stable as $$ select count(*)::bigint,count(*) filter(where created_at>=date_trunc('day',now()))::bigint,coalesce((select jsonb_agg(jsonb_build_object('provincia',a.provincia,'total',a.total) order by a.total desc,a.provincia asc) from(select provincia,count(*)::bigint total from public.assinaturas group by provincia)a),'[]'::jsonb) from public.assinaturas; $$;
+revoke all on function public.obter_estatisticas_assinaturas() from public;
+grant execute on function public.obter_estatisticas_assinaturas() to anon,authenticated;

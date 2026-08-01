@@ -1,28 +1,11 @@
-# BI para Todos — Protótipo de petição
+# BI PARA TODOS — instalação
 
-## O que contém
-- Página responsiva para telemóvel e computador.
-- Formulário de assinatura.
-- Contador demonstrativo.
-- Barra de progresso.
-- Partilha por WhatsApp e cópia de link.
-- Texto com linguagem cívica e equilibrada.
+1. No Supabase, abra **SQL Editor > New query**, cole o conteúdo de `supabase-setup.sql` e clique em **Run**.
+2. Em **Settings > API Keys**, copie apenas a chave `sb_publishable_...`.
+3. Abra `config.js` e substitua `COLE_AQUI_A_PUBLISHABLE_KEY`. Nunca use `sb_secret_...`.
+4. No GitHub, substitua os ficheiros antigos pelos ficheiros desta pasta e faça **Commit changes**. A Vercel publicará automaticamente.
+5. Teste uma assinatura e confirme em **Table Editor > assinaturas**.
 
-## Importante
-Este protótipo guarda assinaturas apenas no navegador do visitante (localStorage). Não é adequado, sozinho, para recolher uma petição nacional.
+Privacidade: o público pode inserir assinaturas e consultar apenas números agregados; nomes individuais não ficam públicos.
 
-Antes de publicar:
-1. Ligar o formulário a uma base de dados segura (Supabase, Firebase ou backend próprio).
-2. Ativar validação por email e proteção CAPTCHA.
-3. Criar política de privacidade e definir responsável pelo tratamento dos dados.
-4. Não recolher nem publicar número do Bilhete de Identidade.
-5. Não usar números fictícios no contador.
-6. Exportar apenas assinaturas validadas e manter registos de auditoria.
-7. Substituir o URL provisório por um domínio real.
-8. Gerar um QR Code depois de o endereço público estar ativo.
-
-## Publicação simples
-Pode publicar estes ficheiros gratuitamente no Netlify, Vercel ou GitHub Pages. Para recolha real, recomenda-se Supabase ou Firebase.
-
-## Nota editorial
-A comunicação oficial consultada descreve um serviço extraordinário ao domicílio sujeito a taxa, distinto do serviço nos postos convencionais. A campanha deve concentrar-se na igualdade, transparência e qualidade do atendimento público normal.
+Limitação: sem email, telefone ou autenticação, não é possível garantir uma assinatura por pessoa. O sistema bloqueia apenas uma segunda assinatura no mesmo navegador.
