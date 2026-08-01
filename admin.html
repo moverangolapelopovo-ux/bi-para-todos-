@@ -16,7 +16,6 @@
 <label>E-mail<input id="email" type="email" required></label>
 <label>Palavra-passe<input id="password" type="password" required></label>
 <button type="submit">ENTRAR</button>
-<button id="forgotPassword" type="button" class="secondary" style="margin-left:8px">ESQUECI A PALAVRA-PASSE</button>
 <p id="loginMsg"></p>
 </form>
 </section>
@@ -28,6 +27,17 @@
 <article><b id="week">—</b><span>7 dias</span></article>
 <article><b id="leader">—</b><span>Província líder</span></article>
 </div>
+
+<section class="charts-grid">
+<article class="card chart-card">
+<h2>Assinaturas por província</h2>
+<canvas id="provinceChart"></canvas>
+</article>
+<article class="card chart-card">
+<h2>Evolução nos últimos 30 dias</h2>
+<canvas id="dailyChart"></canvas>
+</article>
+</section>
 
 <section class="card controls">
 <label>Pesquisar<input id="search" type="search" placeholder="Nome"></label>
@@ -43,6 +53,7 @@
 </section>
 </section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script src="admin.js"></script>
